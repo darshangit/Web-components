@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/document-register-element/1.7.2/document-register-element.js"></script>
+
+    <script>
+        class CustomAnchor extends HTMLAnchorElement {
+            connectedCallback() {
+                this.addEventListener("click", e => {
+                    e.preventDefault();
+
+                    const result = confirm("Suppp !!! Are You sure?");
+
+                    if(result) {
+                        window.location.href = e.target.href;
+                    }
+                });
+            }
+        }
+        window.customElements.define("custom-anchor", CustomAnchor, {extends: "a"});
+    </script>
+
+</head>
+<body>
+    <a is="custom-anchor" href="http://www.google.com/">Go To Google</a>
+</body>
+</html>

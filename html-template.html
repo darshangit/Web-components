@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <template id="list-item">
+        <li>
+            <h1> A movie Title</h1>
+            <p> A Movie Plot</p>
+        </li>
+    </template>
+    <ul id="movie-list"></ul>
+    <script>
+        const items = [
+            {
+                "title": "The lord of the rigs",
+                "plot": "Hobbit"
+            },
+            {
+                "title": "The lord of the rigs: 2 towers",
+                "plot": "FRODO"
+            },
+            {
+                "title": "The lord of the rigs: return of the king",
+                "plot": "Gandalg"
+            }
+        ];
+
+        const $template = document.getElementById("list-item");
+        const $list = document.getElementById("movie-list");
+
+        items.forEach((movie) => {
+            const $clone = document.importNode($template.content, true);
+            $clone.querySelector("h1").innerText = movie.title;
+            $clone.querySelector("p").innerText = movie.plot;
+            $list.appendChild($clone);
+        });
+    </script>
+</body>
+</html>
