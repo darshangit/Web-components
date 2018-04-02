@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="rw-slide-component.js"></script>
+</head>
+<body>
+    <rw-slide-menu id="menu">
+        <h3 slot="title">Nav</h3>
+        <a href="#">One</a>
+        <a href="#">two</a>
+        <a href="#">three</a>
+
+    </rw-slide-menu>
+    <div class="controls">
+        <button class="btn" data-action="open">Open Menu</button>
+        <button class="btn" data-action="close">Close Menu</button>
+    </div>
+    <script>
+        const $controls = document.querySelector(".controls");
+        const $menu = document.getElementById("menu");
+        $controls.addEventListener("click", (event) => {
+            switch (event.target.dataset.action) {
+                case "open":
+                    $menu.open = true;
+                    break;
+                case "close":
+                    $menu.open = false;
+                    break;
+            }
+        });
+        $menu.addEventListener("menu-opened", (event) => {
+            console.log("MENU OPENED!", event);
+        });
+        $menu.addEventListener("menu-closed", (event) => {
+            console.log("MENU CLOSED!", event);
+        });
+    </script>
+</body>
+</html>
