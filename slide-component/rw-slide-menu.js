@@ -1,25 +1,24 @@
 class RwSlideMenu extends HTMLElement {
-    constructor () {
+    constructor() {
         super();
-        this._root = this.attachShadow({ mode: "open"});
-
+        this._root = this.attachShadow({ mode: "open" });
+        // Elements
         this._$frame = null;
+        // Data
         this._open = false;
     }
-
     set open(value) {
         const result = (value === true);
-        if(this._open === result) return;
+        if (this._open === result) return;
         this._open = result;
         this._render();
     }
-
     get open() {
         return this._open;
     }
     connectedCallback() {
         this._root.innerHTML = `
-        <style>
+            <style>
             .frame {
                 position: fixed;
                 top: 0;
@@ -31,8 +30,7 @@ class RwSlideMenu extends HTMLElement {
                 transition: background-color 300ms ease-in;
             }
             .container {
-                width: 80%;
-                max-width: 400px;
+                width: var(--menu-width, 80%);
                 background: #FFF;
                 height: 100%;
                 transform: translateX(-100%);
@@ -44,9 +42,10 @@ class RwSlideMenu extends HTMLElement {
                 display: flex;
                 flex-direction: row;
                 min-height: 3.2em;
-                font-size: 1.5em;
+                font-size: var(--title-size,1.5em);
                 background-color: #F1F1F1;
                 color: #666;
+                @apply --title-styles;
             }
             .title .title-content {
                 flex-grow: 1;
@@ -104,7 +103,7 @@ class RwSlideMenu extends HTMLElement {
             :host([backdrop="false"]) .frame.open .container {
                 pointer-events: auto;
             }
-        </style>
+            </style>
             <div class="frame" data-close="true">
                 <nav class="container">
                     <div class="title">
@@ -115,22 +114,20 @@ class RwSlideMenu extends HTMLElement {
                     </div>
                     <div class="content">
                         <slot class="content-slot"></slot>
-
                     </div>
                 </nav>
             </div>
         `;
         this._$frame = this._root.querySelector(".frame");
         this._$frame.addEventListener("click", (event) => {
-            if(event.target.dataset.close === "true") {
+            if (event.target.dataset.close === "true") {
                 this.open = false;
             }
         });
     }
-
     _render() {
-        if(this._frame !== null){
-            if(this._open === true){
+        if (this._$frame !== null) {
+            if (this._open === true) {
                 this._$frame.classList.add("open");
                 this.dispatchEvent(new CustomEvent("menu-opened"));
             } else {

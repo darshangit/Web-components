@@ -2,18 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <script src="rw-slide-component.js"></script>
+    <script src="rw-slide-menu.js"></script>
+    <title>RevillWeb Slide Menu</title>
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+        }
+        .controls {
+            width: 400px;
+            margin: auto;
+            background-color: #F1F1F1;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            box-shadow: 0 1px 1px rgba(51, 51, 51, 0.50);
+        }
+        .controls .btn {
+            font-family: inherit;
+            font-size: 100%;
+            padding: .5em 1em;
+            color: #CCC;
+            border: 1px solid #000;
+            background-color: #333;
+            text-decoration: none;
+            border-radius: 2px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        rw-slide-menu {
+            --menu-width: 40%;
+            --title-styles: {
+                background-color: #333;
+                color: #e3e3e3;
+                font-size: 2em;
+            }
+        }
+    </style>
 </head>
 <body>
     <rw-slide-menu id="menu">
-        <h3 slot="title">Nav</h3>
+        <h3 slot="title">Nav Menu</h3>
         <a href="#">One</a>
-        <a href="#">two</a>
-        <a href="#">three</a>
-
+        <a href="#">Two</a>
+        <a href="#">Three</a>
     </rw-slide-menu>
     <div class="controls">
         <button class="btn" data-action="open">Open Menu</button>
